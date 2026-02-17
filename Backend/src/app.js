@@ -50,7 +50,7 @@ app.use(express.json()); // Solo esta línea es suficiente para parsear JSON
 app.use(cors(
   {
     //Ruta de acceso a la aplicación
-    origin: `http://localhost:${process.env.PORT_FRONTEND} || http://localhost:3000`,
+    origin: "*",
     credentials: true,
   }
 )); // Permite que los requests se envíen desde cualquier origen
