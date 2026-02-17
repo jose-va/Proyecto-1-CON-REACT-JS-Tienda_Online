@@ -3,14 +3,12 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-import { PGUSER, PGPASSWORD, PGHOST, PGPORT, PGDATABASE } from "../utils/secretDB/secretDB.js";
-
+// Creamos el pool usando la URL completa
 const pool = new pg.Pool({
-  user: PGUSER,
-  password: PGPASSWORD,
-  host: PGHOST,
-  port: PGPORT,
-  database: PGDATABASE,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false, // Requerido para bases de datos en la nube como Render
+  },
 });
 
 export const connectionDB = pool;
@@ -18,4 +16,4 @@ export const connectionDB = pool;
 pool.on('error', (err) => {
   console.error('Unexpected error on idle client', err);
   process.exit(-1);
-});
+});;
