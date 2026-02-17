@@ -103,14 +103,12 @@ export const UserController = {
             const token = generateToken(user);
 
             const cookieOptions = {
-                httpyOnly: true,
-                secure: true,
-                maxAge: 1000 * 60 * 60 * 24 * 7,
-                sameSite: "strict",
-                path: "/",
-                domain: "localhost",
-                maxAge: 24 * 60 * 60 * 1000 // 1 día de duración
-            }
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            path: "/",
+            maxAge: 24 * 60 * 60 * 1000            
+            };
 
             // Establecer la cookie en la respuesta
             res.cookie('token', token, cookieOptions);
